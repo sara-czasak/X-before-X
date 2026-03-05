@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_before_x/theme.dart';
 
 class CheckBoxItem extends StatefulWidget {
   final String? text;
@@ -34,8 +35,12 @@ class _CheckBoxItemState extends State<CheckBoxItem> {
         Expanded(
           child: CheckboxListTile(
             value: isChecked,
-            title: Text(widget.text ?? '....'),
-            activeColor: Colors.green,
+            title: Text(
+              widget.text ?? '....',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.titleColor,
+                  ),
+            ),
             onChanged: (bool? value) {
               setState(() {
                 isChecked = value!;
@@ -45,6 +50,12 @@ class _CheckBoxItemState extends State<CheckBoxItem> {
           ),
         ),
         PopUpBox(
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.appBarColor,
+            foregroundColor: AppColors.titleColor,
+            shape: CircleBorder(),
+            fixedSize: Size(45, 45),
+          ),
           title: 'Edit Task',
           buttonText: Icon(Icons.edit),
           hintText: 'Enter task...',
@@ -191,6 +202,12 @@ class RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      style: IconButton.styleFrom(
+        backgroundColor: AppColors.appBarColor,
+        foregroundColor: AppColors.titleColor,
+        shape: CircleBorder(),
+        fixedSize: Size(45, 45),
+      ),
       icon: icon,
       onPressed: () {
         Navigator.push(
@@ -200,4 +217,54 @@ class RoundButton extends StatelessWidget {
       },
     );
   }
+}
+
+class RippleAnimation extends StatelessWidget {
+  final AnimationController controller;
+  const RippleAnimation({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return CustomPaint(
+          painter: RipplePainter(animationValue: controller.value),
+          size: Size(300, 300),
+        );
+      },
+    );
+  }
+}
+
+class RipplePainter extends CustomPainter {
+  final double animationValue;
+
+  RipplePainter({required this.animationValue});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final maxRadius = 100.0;
+
+    for (int i = 0; i < 3; i++) {
+      final radius = (animationValue * maxRadius) - (i * 30);
+      if (radius > 0) {
+        final paint = Paint()
+          ..color = AppColors.mainColor
+              .withAlpha((255 * (1 - animationValue)).toInt())
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2;
+        canvas.drawCircle(center, radius, paint);
+      }
+    }
+
+    final centerDot = Paint()
+      ..color = AppColors.mainColor
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, 15, centerDot);
+  }
+
+  @override
+  bool shouldRepaint(RipplePainter oldDelegate) => true;
 }

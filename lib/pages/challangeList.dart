@@ -52,8 +52,11 @@ class _ChallangePageState extends State<ChallangePage> {
       ),
       body: ListView(
         children: [
-          Center(
-            child: Text(widget.title ?? 'General'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            child: Center(
+              child: Text(widget.title ?? 'General'),
+            ),
           ),
           for (int i = 0; i < tasks.length; i++)
             CheckBoxItem(

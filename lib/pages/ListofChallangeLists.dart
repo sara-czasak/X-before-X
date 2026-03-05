@@ -42,29 +42,42 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
             ? Text('X before X')
             : Text('~ ${widget.age + 1} before ${widget.age + 1} ~'),
       ),
-      body: ListView(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-            child: Center(
-              child: Text(
-                  'Welcome ${widget.name[0].toUpperCase()}${widget.name.substring(1)}!'),
+          ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+                child: Center(
+                  child: Text(
+                      'Welcome ${widget.name[0].toUpperCase()}${widget.name.substring(1)}!'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
+                child: Center(
+                  child: Text('Pick your Challange list:'),
+                ),
+              ),
+              for (String listName in challangeListNames)
+                NavigationButton(
+                  text: listName,
+                  page: ChallangePage(
+                      name: widget.name, age: widget.age, title: listName),
+                ),
+            ],
+          ),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            child: RoundButton(
+              icon: Icon(Icons.home),
+              page: HomePage(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
-            child: Center(
-              child: Text('Pick your Challange list:'),
-            ),
-          ),
-          for (String listName in challangeListNames)
-            NavigationButton(
-              text: listName,
-              page: ChallangePage(
-                  name: widget.name, age: widget.age, title: listName),
-            ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(100, 40, 100, 5),
+          Positioned(
+            bottom: 16,
+            right: 16,
             child: PopUpBox(
               style: IconButton.styleFrom(
                 backgroundColor: AppColors.appBarColor,
@@ -87,10 +100,6 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
                 });
               },
             ),
-          ),
-          RoundButton(
-            icon: Icon(Icons.home),
-            page: HomePage(),
           ),
         ],
       ),

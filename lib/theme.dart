@@ -62,4 +62,8 @@ ThemeData primeryTheme = ThemeData(
       ),
     ),
   ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: WidgetStateProperty.all(AppColors.bodyColor),
+    checkColor: WidgetStateProperty.all(Colors.white),
+  ),
 );

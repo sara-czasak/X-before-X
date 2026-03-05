@@ -3,6 +3,7 @@ import 'package:x_before_x/customWidgets.dart';
 import 'package:x_before_x/pages/ListofChallangeLists.dart';
 import 'package:x_before_x/pages/challangeList.dart';
 import 'package:x_before_x/storage.dart';
+import 'package:x_before_x/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -66,6 +67,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text("Enter your name: "),
                     PopUpBox(
+                      style: IconButton.styleFrom(
+                        backgroundColor: AppColors.appBarColor,
+                        foregroundColor: AppColors.titleColor,
+                        shape: CircleBorder(),
+                        fixedSize: Size(45, 45),
+                      ),
                       title: 'Enter name',
                       buttonText: Icon(Icons.person),
                       hintText: 'enter your name...',
@@ -85,6 +92,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text("Enter your age: "),
                     PopUpBox(
+                      style: IconButton.styleFrom(
+                        backgroundColor: AppColors.appBarColor,
+                        foregroundColor: AppColors.titleColor,
+                        shape: CircleBorder(),
+                        fixedSize: Size(45, 45),
+                      ),
                       title: 'Enter age',
                       buttonText: Icon(Icons.numbers),
                       hintText: 'enter your age...',
