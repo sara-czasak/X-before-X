@@ -65,12 +65,14 @@ class PopUpBox extends StatefulWidget {
   final Widget buttonText;
   final String hintText;
   final Function(String) onSubmit;
+  final ButtonStyle? style;
   const PopUpBox({
     super.key,
     required this.title,
     required this.buttonText,
     required this.hintText,
     required this.onSubmit,
+    this.style,
   });
 
   @override
@@ -98,6 +100,7 @@ class _PopUpBoxState extends State<PopUpBox> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      style: widget.style,
       onPressed: () async {
         final name = await openDialog();
         if (name == null || name.isEmpty) return;
@@ -152,33 +155,23 @@ class NavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-      child: Container(
-        height: 40,
-        width: 500,
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-        ),
-        child: TextButton(
-          onPressed: () {
-            if (!clearStack) {
-              Navigator.push(
+      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 5),
+      child: TextButton(
+        onPressed: () {
+          if (!clearStack) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => page),
+            );
+          } else {
+            Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => page),
-              );
-            } else {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => page),
-                  (route) => false);
-            }
-          },
-          child: Text(
-            text.toUpperCase(),
-          ),
+                (route) => false);
+          }
+        },
+        child: Text(
+          text.toUpperCase(),
         ),
       ),
     );

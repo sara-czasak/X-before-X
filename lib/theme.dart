@@ -44,7 +44,22 @@ ThemeData primeryTheme = ThemeData(
     style: TextButton.styleFrom(
       foregroundColor: AppColors.titleColor,
       backgroundColor: AppColors.appBarColor,
-      fixedSize: Size(50, 20),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+    ),
+  ),
+  iconButtonTheme: IconButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: WidgetStateProperty.all(AppColors.appBarColor),
+      foregroundColor: WidgetStateProperty.all(AppColors.titleColor),
+      shape: WidgetStateProperty.all(
+        CircleBorder(),
+      ),
+      fixedSize: WidgetStateProperty.all(
+        Size(45, 45),
+      ),
     ),
   ),
 );

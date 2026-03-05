@@ -3,6 +3,7 @@ import 'package:x_before_x/customWidgets.dart';
 import 'package:x_before_x/pages/challangeList.dart';
 import 'package:x_before_x/pages/home.dart';
 import 'package:x_before_x/storage.dart';
+import 'package:x_before_x/theme.dart';
 
 class ChallangeListPage extends StatefulWidget {
   final String name;
@@ -43,12 +44,18 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
       ),
       body: ListView(
         children: [
-          Center(
-            child: Text(
-                'Welcome ${widget.name[0].toUpperCase()}${widget.name.substring(1)}!'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+            child: Center(
+              child: Text(
+                  'Welcome ${widget.name[0].toUpperCase()}${widget.name.substring(1)}!'),
+            ),
           ),
-          Center(
-            child: Text('Pick your Challange list:'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
+            child: Center(
+              child: Text('Pick your Challange list:'),
+            ),
           ),
           for (String listName in challangeListNames)
             NavigationButton(
@@ -59,6 +66,12 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(100, 40, 100, 5),
             child: PopUpBox(
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.appBarColor,
+                foregroundColor: AppColors.titleColor,
+                shape: CircleBorder(),
+                fixedSize: Size(45, 45),
+              ),
               title: 'New Challange List',
               buttonText: Icon(Icons.add),
               hintText: 'Name challange list',
