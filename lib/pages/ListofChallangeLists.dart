@@ -68,7 +68,7 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
             ],
           ),
           Positioned(
-            bottom: 16,
+            bottom: 32,
             left: 16,
             child: RoundButton(
               icon: Icon(Icons.home),
@@ -76,7 +76,7 @@ class _ChallangeListPageState extends State<ChallangeListPage> {
             ),
           ),
           Positioned(
-            bottom: 16,
+            bottom: 32,
             right: 16,
             child: PopUpBox(
               style: IconButton.styleFrom(
